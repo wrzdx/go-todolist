@@ -25,7 +25,7 @@ func DecodeAndValidateRequest(r *http.Request, dest any) error {
 	}
 
 	v, ok := dest.(validatable)
-	
+
 	var err error
 	if ok {
 		err = v.Validate()

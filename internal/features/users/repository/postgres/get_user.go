@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/jackc/pgx/v5"
 	"github.com/wrzdx/go-todolist/internal/core/domain"
 	core_errors "github.com/wrzdx/go-todolist/internal/core/errors"
+	core_postgres_pool "github.com/wrzdx/go-todolist/internal/core/repository/postgres/pool"
 )
 
 func (r *UsersRepository) GetUser(
@@ -15,7 +15,7 @@ func (r *UsersRepository) GetUser(
 	id int,
 ) (domain.User, error) {
 	ctx, cancel := context.WithTimeout(ctx, r.pool.OptTimeout())
-	defer  cancel()
+	defer cancel()
 	query := `
 	SELECT id, version, full_name, phone_number 
 	FROM todoapp.users
@@ -23,16 +23,16 @@ func (r *UsersRepository) GetUser(
 	`
 
 	row := r.pool.QueryRow(ctx, query, id)
-	
+
 	var userModel UserModel
-	err:= row.Scan(
+	err := row.Scan(
 		&userModel.ID,
 		&userModel.Version,
 		&userModel.FullName,
 		&userModel.PhoneNumber,
 	)
-	if err!= nil {
-		if errors.Is(err, pgx.ErrNoRows) {
+	if err != nil {
+		if errors.Is(err, core_postgres_pool.ErrNoRows) {
 			return domain.User{}, fmt.Errorf(
 				"user with id='%d': %w",
 				id,
@@ -43,7 +43,7 @@ func (r *UsersRepository) GetUser(
 		return domain.User{}, fmt.Errorf("scan error: %w", err)
 	}
 
-	userDomain:= domain.NewUser(
+	userDomain := domain.NewUser(
 		userModel.ID,
 		userModel.Version,
 		userModel.FullName,

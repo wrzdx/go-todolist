@@ -28,7 +28,7 @@ func (s *UsersService) GetUsers(
 	}
 
 	users, err := s.userRepository.GetUsers(ctx, limit, offset)
-	if err!= nil {
+	if err != nil {
 		return nil, fmt.Errorf("get users from repository: %w", err)
 	}
 

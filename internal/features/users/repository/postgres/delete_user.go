@@ -13,13 +13,13 @@ func (r *UsersRepository) DeleteUser(
 ) error {
 	ctx, cancel := context.WithTimeout(ctx, r.pool.OptTimeout())
 	defer cancel()
-	query:= `
+	query := `
 	DELETE FROM todoapp.users
 	WHERE id=$1;
 	`
 
-	cmdTag, err:=r.pool.Exec(ctx, query,id)
-	if err!=nil {
+	cmdTag, err := r.pool.Exec(ctx, query, id)
+	if err != nil {
 		return fmt.Errorf("exec query: %w", err)
 	}
 
