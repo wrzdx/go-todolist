@@ -73,7 +73,11 @@ func (h *HTTPResponseHandler) JSONResponse(
 	statusCode int,
 ) {
 	h.rw.WriteHeader(statusCode)
-	if err:= json.NewEncoder(h.rw).Encode(responseBody); err!= nil {
+	if err := json.NewEncoder(h.rw).Encode(responseBody); err != nil {
 		h.log.Error("write HTTP response", zap.Error(err))
 	}
+}
+
+func (h *HTTPResponseHandler) NoContentResponse() {
+	h.rw.WriteHeader(http.StatusNoContent)
 }

@@ -39,7 +39,7 @@ func main() {
 		ctx,
 		core_postgres_pool.NewConfigMust(),
 	)
-	if err!=nil {
+	if err != nil {
 		logger.Fatal("failed to init postgres connection pool", zap.Error(err))
 	}
 
