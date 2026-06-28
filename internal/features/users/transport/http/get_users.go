@@ -43,7 +43,7 @@ func getLimitOffsetQueryParams(r *http.Request) (*int, *int, error) {
 		return nil, nil, fmt.Errorf("get 'limit' query param: %w", err)
 	}
 
-	offset, err := core_http_request.GetIntQueryParam(r, limitQueryParamKey)
+	offset, err := core_http_request.GetIntQueryParam(r, offsetQueryParamKey)
 	if err != nil {
 		return nil, nil, fmt.Errorf("get 'offset' query param: %w", err)
 	}
