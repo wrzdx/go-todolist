@@ -52,13 +52,13 @@ func (r *TasksRepository) GetTasks(
 			&taskModel.CompletedAt,
 			&taskModel.AuthorUserID,
 		)
-		if err!=nil {
+		if err != nil {
 			return nil, fmt.Errorf("scan tasks: %w", err)
 		}
 		taskModels = append(taskModels, taskModel)
 	}
 
-	if err:= rows.Err(); err!= nil {
+	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("next rows: %w", err)
 	}
 

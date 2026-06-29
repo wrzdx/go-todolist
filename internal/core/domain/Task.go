@@ -180,7 +180,7 @@ func (t *Task) ApplyPatch(patch TaskPatch) error {
 			tmp.CompletedAt = nil
 		}
 	}
-	if err:=tmp.Validate(); err!= nil {
+	if err := tmp.Validate(); err != nil {
 		return fmt.Errorf(
 			"validate patched task: %w",
 			err,

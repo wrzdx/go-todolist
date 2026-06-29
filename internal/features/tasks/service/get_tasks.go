@@ -30,7 +30,7 @@ func (s *TasksService) GetTasks(
 
 	tasks, err := s.tasksRepository.GetTasks(ctx, userID, limit, offset)
 
-	if err!= nil {
+	if err != nil {
 		return nil, fmt.Errorf("get tasks from repository: %w", err)
 	}
 

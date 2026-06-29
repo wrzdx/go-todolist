@@ -16,13 +16,13 @@ func (h *TasksHTTPHandler) GetTask(w http.ResponseWriter, r *http.Request) {
 	responseHandler := core_http_response.NewHTTPResponseHandler(log, w)
 
 	taskID, err := core_http_request.GetIntPathValue(r, "id")
-	if err!=nil {
+	if err != nil {
 		responseHandler.ErrorResponse(err, "failed to get taskID path value")
 		return
 	}
 
 	taskDomain, err := h.tasksService.GetTask(ctx, taskID)
-	if err!= nil {
+	if err != nil {
 		responseHandler.ErrorResponse(err, "failed to get task")
 		return
 	}

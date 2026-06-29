@@ -19,7 +19,7 @@ type StatisticsService interface {
 		userID *int,
 		from *time.Time,
 		to *time.Time,
-	) (domain.Statistics, error) 
+	) (domain.Statistics, error)
 }
 
 func NewStatisticsHTTPHandler(statisticsService StatisticsService) *StatisticsHTTPHandler {
@@ -31,8 +31,8 @@ func NewStatisticsHTTPHandler(statisticsService StatisticsService) *StatisticsHT
 func (h *StatisticsHTTPHandler) Routes() []core_http_server.Route {
 	return []core_http_server.Route{
 		{
-			Method: http.MethodGet,
-			Path: "/statistics",
+			Method:  http.MethodGet,
+			Path:    "/statistics",
 			Handler: h.GetStatistics,
 		},
 	}

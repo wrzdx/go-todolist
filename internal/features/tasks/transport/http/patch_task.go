@@ -17,7 +17,6 @@ type PatchTaskRequest struct {
 	Completed   core_http_types.Nullable[bool]   `json:"completed"`
 }
 
-
 func (r *PatchTaskRequest) Validate() error {
 	if r.Title.Set {
 		if r.Title.Value == nil {
@@ -69,7 +68,7 @@ func (h *TasksHTTPHandler) PatchTask(w http.ResponseWriter, r *http.Request) {
 
 	taskPatch := taskPatchFromRequest(request)
 	taskDomain, err := h.tasksService.PatchTask(ctx, taskID, taskPatch)
-	if err!= nil {
+	if err != nil {
 		responseHandler.ErrorResponse(err, "failed to patch task")
 		return
 	}

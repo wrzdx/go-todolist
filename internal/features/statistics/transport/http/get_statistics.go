@@ -58,29 +58,6 @@ func toDTOFromDomain(statistics domain.Statistics) GetStatisticsResponse {
 	}
 }
 
-func getUserIDLimitOffsetQueryParams(r *http.Request) (*int, *int, *int, error) {
-	const (
-		userIDQueryParamKey = "user_id"
-		limitQueryParamKey  = "limit"
-		offsetQueryParamKey = "offset"
-	)
-	userID, err := core_http_request.GetIntQueryParam(r, userIDQueryParamKey)
-	if err != nil {
-		return nil, nil, nil, fmt.Errorf("get 'user_id' query param: %w", err)
-	}
-	limit, err := core_http_request.GetIntQueryParam(r, limitQueryParamKey)
-	if err != nil {
-		return nil, nil, nil, fmt.Errorf("get 'limit' query param: %w", err)
-	}
-
-	offset, err := core_http_request.GetIntQueryParam(r, offsetQueryParamKey)
-	if err != nil {
-		return nil, nil, nil, fmt.Errorf("get 'offset' query param: %w", err)
-	}
-
-	return userID, limit, offset, nil
-}
-
 func getUserIDFromToQueryParams(r *http.Request) (*int, *time.Time, *time.Time, error) {
 	const (
 		userIDQueryParamKey = "user_id"

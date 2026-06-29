@@ -29,7 +29,6 @@ func GetIntQueryParam(r *http.Request, key string) (*int, error) {
 	return &val, nil
 }
 
-
 func GetDateQueryParam(r *http.Request, key string) (*time.Time, error) {
 	param := r.URL.Query().Get(key)
 	if param == "" {
