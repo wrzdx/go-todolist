@@ -17,16 +17,16 @@ func (h *TasksHTTPHandler) GetTasks(w http.ResponseWriter, r *http.Request) {
 	responseHandler := core_http_response.NewHTTPResponseHandler(log, w)
 
 	userID, limit, offset, err := getUserIDLimitOffsetQueryParams(r)
-	if err!= nil {
+	if err != nil {
 		responseHandler.ErrorResponse(
-			err, 
+			err,
 			"failed to get userID/limit/offset query params",
 		)
 		return
 	}
 
 	taskDomains, err := h.tasksService.GetTasks(ctx, userID, limit, offset)
-	if err!= nil {
+	if err != nil {
 		responseHandler.ErrorResponse(err, "failed to get tasks")
 		return
 	}
@@ -43,7 +43,7 @@ func getUserIDLimitOffsetQueryParams(r *http.Request) (*int, *int, *int, error) 
 		offsetQueryParamKey = "offset"
 	)
 	userID, err := core_http_request.GetIntQueryParam(r, userIDQueryParamKey)
-	if err!= nil {
+	if err != nil {
 		return nil, nil, nil, fmt.Errorf("get 'user_id' query param: %w", err)
 	}
 	limit, err := core_http_request.GetIntQueryParam(r, limitQueryParamKey)

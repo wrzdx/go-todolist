@@ -19,7 +19,7 @@ func (h *TasksHTTPHandler) DeleteTask(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err:= h.tasksService.DeleteTask(ctx, taskID); err!= nil {
+	if err := h.tasksService.DeleteTask(ctx, taskID); err != nil {
 		responseHandler.ErrorResponse(err, "failed to delete task")
 		return
 	}

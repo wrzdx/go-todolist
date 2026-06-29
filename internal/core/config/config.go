@@ -29,7 +29,7 @@ func NewConfig() (*Config, error) {
 
 func NewConfigMust() *Config {
 	config, err := NewConfig()
-	if err!= nil {
+	if err != nil {
 		err = fmt.Errorf("get core config: %w", err)
 		panic(err)
 	}
