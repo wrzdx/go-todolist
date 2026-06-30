@@ -12,9 +12,9 @@ import (
 )
 
 type PatchTaskRequest struct {
-	Title       core_http_types.Nullable[string] `json:"title"`
-	Description core_http_types.Nullable[string] `json:"description"`
-	Completed   core_http_types.Nullable[bool]   `json:"completed"`
+	Title       core_http_types.Nullable[string] `json:"title" swaggertype:"string" example:"Тренировка"`
+	Description core_http_types.Nullable[string] `json:"description" swaggertype:"string" example:"Сделать день ног"`
+	Completed   core_http_types.Nullable[bool]   `json:"completed" swaggertype:"boolean" example:"true"`
 }
 
 func (r *PatchTaskRequest) Validate() error {
@@ -49,6 +49,25 @@ func (r *PatchTaskRequest) Validate() error {
 
 type PatchTaskResponse TaskDTOResponse
 
+// PatchTask   godoc
+// @Summary     Изменение задачи
+// @Description Изменение информации об уже существующей в системе задаче
+// @Description ### Логика обновления полей(Three-state logic):
+// @Description 1. **Поле не переданно**: `description` игнорируется, значение в БД не меняется
+// @Description 2. **Явно переданно значение**: `"description": "Сделать день ног"` - устанавливает новое описание в БД
+// @Description 3. **Передан null**: `"description": null` - очищает поле в БД (set to NULL)
+// @Description Ограничение: `title` и `completed` не могут быть выставлены как null
+// @Tags        tasks
+// @Accept      json
+// @Produce     json
+// @Param       id path int true "ID изменяемой задачи"
+// @Param       request body PatchTaskRequest true "PatchTask тело запроса"
+// @Success     200 {object} PatchTaskResponse "Успешно измененная задача"
+// @Failure     400 {object} core_http_response.ErrorResponse "Bad Request"
+// @Failure     404 {object} core_http_response.ErrorResponse "Task Not Found"
+// @Failure     409 {object} core_http_response.ErrorResponse "Conflict"
+// @Failure     500 {object} core_http_response.ErrorResponse "Internal Server Error"
+// @Router      /tasks/{id} [patch]
 func (h *TasksHTTPHandler) PatchTask(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := core_logger.FromContext(ctx)
