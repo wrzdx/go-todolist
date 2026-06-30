@@ -20,7 +20,7 @@ CREATE TABLE todoapp.tasks (
     completed      BOOLEAN       NOT NULL,
     created_at      TIMESTAMPTZ   NOT NULL,
     completed_at   TIMESTAMPTZ,
-    author_user_id INTEGER       NOT NULL REFERENCES todoapp.users(id),
+    author_user_id INTEGER       NOT NULL REFERENCES todoapp.users(id) ON DELETE CASCADE,
 
     CHECK (
         (completed=FALSE AND completed_at IS NULL) 

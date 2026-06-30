@@ -15,7 +15,7 @@ type GetStatisticsResponse struct {
 	TasksCreated               int      `json:"tasks_created" example:"10"`
 	TasksCompleted             int      `json:"tasks_completed" example:"3"`
 	TasksCompletionRate        *float64 `json:"tasks_completion_rate" example:"30"`
-	TasksAverageCompletionTime *string  `json:"tasks_average_completion_rate" example:"8m30s"`
+	TasksAverageCompletionTime *string  `json:"tasks_average_completion_time" example:"8m30s"`
 }
 
 // GetStatistics      godoc
